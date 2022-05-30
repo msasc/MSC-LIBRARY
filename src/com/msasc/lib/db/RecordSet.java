@@ -18,7 +18,6 @@
  */
 package com.msasc.lib.db;
 
-import java.util.Comparator;
 import java.util.Iterator;
 
 /**
@@ -42,24 +41,6 @@ public abstract class RecordSet implements Iterable<Record> {
 	 * @param fields The list of fields.
 	 */
 	public RecordSet(FieldList fields) { setFieldList(fields); }
-
-	/**
-	 * Inserts a record at a given index.
-	 * @param index  The index.
-	 * @param record The record to insert.
-	 */
-	public abstract void add(int index, Record record);
-	/**
-	 * Add a record to the list.
-	 * @param record The record to add
-	 * @return A boolean indicating if the record has been added.
-	 */
-	public abstract void add(Record record);
-
-	/**
-	 * Clear the list of records.
-	 */
-	public abstract void clear();
 
 	/**
 	 * Check if the record set contains a record with the given primary key.
@@ -94,12 +75,6 @@ public abstract class RecordSet implements Iterable<Record> {
 	 * @param index The index in the record list.
 	 */
 	protected abstract Record getRecord(int index);
-
-	/**
-	 * Returns a copy of this record set.
-	 * @return A copy.
-	 */
-	public abstract RecordSet getCopy();
 
 	/**
 	 * Get the field at the given index.
@@ -166,32 +141,10 @@ public abstract class RecordSet implements Iterable<Record> {
 	public abstract boolean isEmpty();
 
 	/**
-	 * Check if the record set can be sorted. Default is true, overwrite this method
-	 * if the record set implementation can not be sorted.
-	 *
-	 * @return A boolean.
-	 */
-	public boolean isSortable() { return true; }
-
-	/**
 	 * Return the iterator.
 	 */
 	@Override
 	public abstract Iterator<Record> iterator();
-
-	/**
-	 * Remove a record given its index in the list.
-	 * @return The removed record.
-	 * @param index The index in the list of records.
-	 */
-	public abstract Record remove(int index);
-
-	/**
-	 * Sets a record given its index in the record list.
-	 * @param index  The index in the record list.
-	 * @param record The record.
-	 */
-	public abstract void set(int index, Record record);
 
 	/**
 	 * Sets the field list.
@@ -209,35 +162,6 @@ public abstract class RecordSet implements Iterable<Record> {
 	 * @return The size.
 	 */
 	public abstract int size();
-
-	/**
-	 * Sort this list of records based on the order by key pointers, or in its
-	 * default the primary key pointers.
-	 */
-	public void sort() {
-		if (size() == 0) return;
-		sort(fields.getPrimaryOrder());
-	}
-
-	/**
-	 * Sort this list of records based on a comparator.
-	 * @param comparator The comparator.
-	 */
-	public abstract void sort(Comparator<Record> comparator);
-
-	/**
-	 * Sort this list of records based on the order stated by the argument order.
-	 * @param order The <code>Order</code> to use in the sort.
-	 */
-	public void sort(Order order) {
-		sort(new RecordComparator(order));
-	}
-
-	/**
-	 * Returns an array containing all the records.
-	 * @return The array of records.
-	 */
-	public abstract Record[] toArray();
 
 	/**
 	 * To string.

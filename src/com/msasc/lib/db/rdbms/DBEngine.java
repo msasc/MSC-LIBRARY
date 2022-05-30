@@ -197,7 +197,7 @@ public class DBEngine {
 			}
 			iter.select(sql, fields);
 			if (progress != null) progress.setIndeterminate(false);
-			RecordSet recordSet = new RecordList();
+			RecordList recordSet = new RecordList();
 			recordSet.setFieldList(fields);
 			while (iter.hasNext()) {
 				if (progress != null) {
@@ -255,7 +255,7 @@ public class DBEngine {
 				progress.setIndeterminate(false);
 			}
 
-			RecordSet recordSet = new RecordList();
+			RecordList recordSet = new RecordList();
 			recordSet.setFieldList(fields);
 			while (rs.next()) {
 
@@ -407,7 +407,7 @@ public class DBEngine {
 	 * @throws SQLException If an SQL error occurs.
 	 */
 	public RecordSet readRecordSet(DBResultSet rs, FieldList fields) throws SQLException {
-		RecordSet recordSet = new RecordList();
+		RecordList recordSet = new RecordList();
 		recordSet.setFieldList(fields);
 		while (rs.next()) {
 			Record record = readRecord(rs, fields);

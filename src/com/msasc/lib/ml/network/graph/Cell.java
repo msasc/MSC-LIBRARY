@@ -40,7 +40,7 @@ public class Cell {
 
 	/**
 	 * Creates a generic RNN cell definition that can range from a simple BP cell without bias, up
-	 * to a RNN cell with bias. Pushes all created nodes to the network.
+	 * to a RNN cell with bias.
 	 * 
 	 * @param inputSize  Input size.
 	 * @param outputSize Output size.

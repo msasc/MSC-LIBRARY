@@ -248,8 +248,8 @@ public abstract class DBMetaData {
 	 * @return The record set.
 	 * @throws SQLException If an SQL error occurs.
 	 */
-	protected RecordSet readRecordSet(DBResultSet rs, FieldList fields) throws SQLException {
-		RecordSet recordSet = new RecordList();
+	protected RecordList readRecordSet(DBResultSet rs, FieldList fields) throws SQLException {
+		RecordList recordSet = new RecordList();
 		recordSet.setFieldList(fields);
 		while (rs.next()) {
 			Record record = new Record(fields);
@@ -279,7 +279,7 @@ public abstract class DBMetaData {
 	 * @throws SQLException If an error occurs.
 	 */
 	protected RecordSet readRecordSet(StringBuilder sql, FieldList fields) throws SQLException {
-		RecordSet recordSet = new RecordList(fields);
+		RecordList recordSet = new RecordList(fields);
 		DBConnection cn = null;
 		DBStatement st = null;
 		DBResultSet rs = null;

@@ -25,7 +25,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * A <em>RecordSet</em> backed by an array list of records.
+ * A <i>RecordSet</i> backed by an array list of records. If the source was a database table or
+ * view, operations like add, set or remove are not persistent.
  *
  * @author Miquel Sas
  */
@@ -43,17 +44,6 @@ public class RecordList extends RecordSet {
 	 * @param fields The list of fields.
 	 */
 	public RecordList(FieldList fields) { setFieldList(fields); }
-
-	/**
-	 * Returns a copy of this record set.
-	 * @return A copy.
-	 */
-	public RecordList getCopy() {
-		RecordList recordSet = new RecordList();
-		recordSet.setFieldList(getFieldList());
-		recordSet.records.addAll(records);
-		return recordSet;
-	}
 
 	/**
 	 * Clear the list of records.
@@ -74,17 +64,6 @@ public class RecordList extends RecordSet {
 	public void add(Record record) {
 		if (getFieldList() == null) setFieldList(record.getFields());
 		records.add(record);
-	}
-
-	/**
-	 * Inserts a record at a given index.
-	 *
-	 * @param index  The index.
-	 * @param record The record to insert.
-	 */
-	public void add(int index, Record record) {
-		if (getFieldList() == null) setFieldList(record.getFields());
-		records.add(index, record);
 	}
 
 	/**

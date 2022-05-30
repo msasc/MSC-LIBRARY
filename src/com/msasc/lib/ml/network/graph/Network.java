@@ -69,15 +69,18 @@ public class Network {
 	 * @param outputDeltasList List of arrays of output deltas, in the same order as the list of
 	 *                         output edges.
 	 */
-	public void backward(double[]... outputDeltasList) {
+	public void backward(List<double[]> outputDeltasList) {
 
-		/* Validate initialized. */
+		/* Validate initialized and sizes. */
 		checkInitialized();
-
-		/* Validate number of output edges. */
-		if (outputDeltasList.length != outputEdges.size()) {
-			throw new IllegalArgumentException("Invalid number of output deltas groups.");
+		checkSizes(outputDeltasList.size(), outputEdges.size());
+		
+		/* Push backward output deltas. */
+		for (int i = 0; i < outputDeltasList.size(); i++) {
+			double[] outputDeltas = outputDeltasList.get(i);
+			outputEdges.get(i).pushBackward(outputDeltas);
 		}
+
 
 		/* Push backward layers. */
 		for (int i = layers.size() - 1; i >= 0; i--) {
@@ -96,19 +99,15 @@ public class Network {
 	 * @param inputValuesList List of arrays of input values, in the same order as the list of input
 	 *                        edges.
 	 */
-	public void forward(double[]... inputValuesList) {
+	public void forward(List<double[]> inputValuesList) {
 
-		/* Validate initialized. */
+		/* Validate initialized and sizes. */
 		checkInitialized();
-
-		/* Validate number of input edges. */
-		if (inputValuesList.length != inputEdges.size()) {
-			throw new IllegalArgumentException("Invalid number of input values groups.");
-		}
+		checkSizes(inputValuesList.size(), inputEdges.size());
 
 		/* Push forward input values. */
-		for (int i = 0; i < inputValuesList.length; i++) {
-			double[] inputValues = inputValuesList[i];
+		for (int i = 0; i < inputValuesList.size(); i++) {
+			double[] inputValues = inputValuesList.get(i);
 			inputEdges.get(i).pushForward(inputValues);
 		}
 
@@ -214,6 +213,14 @@ public class Network {
 	private void checkInitialized() {
 		if (inputEdges == null || outputEdges == null || layers == null || edges == null) {
 			throw new IllegalStateException("Network not properly initialized.");
+		}
+	}
+	/**
+	 * Check sizes.
+	 */
+	private void checkSizes(int size1, int size2) {
+		if (size1 != size2) {
+			throw new IllegalArgumentException("Sizes do not match.");
 		}
 	}
 	
