@@ -17,13 +17,13 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.msasc.lib.ml.network.function;
+package com.msasc.lib.ml.funtion;
 
-import com.msasc.lib.ml.network.function.activation.BipolarSigmoid;
-import com.msasc.lib.ml.network.function.activation.ReLU;
-import com.msasc.lib.ml.network.function.activation.Sigmoid;
-import com.msasc.lib.ml.network.function.activation.SoftMax;
-import com.msasc.lib.ml.network.function.activation.TANH;
+import com.msasc.lib.ml.funtion.activation.BipolarSigmoid;
+import com.msasc.lib.ml.funtion.activation.ReLU;
+import com.msasc.lib.ml.funtion.activation.Sigmoid;
+import com.msasc.lib.ml.funtion.activation.SoftMax;
+import com.msasc.lib.ml.funtion.activation.TANH;
 
 /**
  * Activation function.

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.msasc.lib.ml.network.graph.nodes;
+package com.msasc.lib.ml.graph.nodes;
 
 import java.util.Random;
 import java.util.UUID;
@@ -22,7 +22,7 @@ import java.util.UUID;
 import com.msasc.lib.json.JSONArray;
 import com.msasc.lib.json.JSONObject;
 import com.msasc.lib.json.JSONTypes;
-import com.msasc.lib.ml.network.graph.Node;
+import com.msasc.lib.ml.graph.Node;
 
 /**
  * Minimum weights node using stochastic gradient descent back propagation to apply adjustments.

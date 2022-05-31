@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.msasc.lib.ml.network.graph;
+package com.msasc.lib.ml.graph;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,9 +26,9 @@ import java.util.UUID;
 import com.msasc.lib.json.JSONArray;
 import com.msasc.lib.json.JSONObject;
 import com.msasc.lib.json.JSONTypes;
-import com.msasc.lib.ml.network.graph.nodes.ActivationNode;
-import com.msasc.lib.ml.network.graph.nodes.BiasNode;
-import com.msasc.lib.ml.network.graph.nodes.WeightsNode;
+import com.msasc.lib.ml.graph.nodes.ActivationNode;
+import com.msasc.lib.ml.graph.nodes.BiasNode;
+import com.msasc.lib.ml.graph.nodes.WeightsNode;
 
 /**
  * A network or computational graph, made of wired cells of nodes that interface through input and

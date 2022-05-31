@@ -14,15 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.msasc.lib.ml.network.graph.nodes;
+package com.msasc.lib.ml.graph.nodes;
 
 import java.util.UUID;
 
 import com.msasc.lib.json.JSONObject;
 import com.msasc.lib.json.JSONTypes;
-import com.msasc.lib.ml.network.function.Activation;
-import com.msasc.lib.ml.network.graph.Edge;
-import com.msasc.lib.ml.network.graph.Node;
+import com.msasc.lib.ml.funtion.Activation;
+import com.msasc.lib.ml.graph.Edge;
+import com.msasc.lib.ml.graph.Node;
 
 /**
  * Activation node. Can have any number of input and output edges, but all must have the same size.
