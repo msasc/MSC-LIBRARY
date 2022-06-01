@@ -12,38 +12,34 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.msasc.lib.ml.funtion.activation;
+package com.msasc.lib.ml.function.activation;
 
-import com.msasc.lib.ml.funtion.Activation;
-import com.msasc.lib.util.Numbers;
+import com.msasc.lib.ml.function.Activation;
 
 /**
- * Soft-max activation.
+ * Sigmoid activation.
  * @author Miquel Sas
  */
-public class SoftMax extends Activation {
+public class Sigmoid extends Activation {
 	
+	/** Steepness. */
+	private double sigma = 1.0;
+
 	/**
 	 * Constructor.
 	 */
-	public SoftMax() {}
-	
+	public Sigmoid() {}
+
 	/**
-	 * Apply activations.
+	 * Apply activation.
 	 */
 	@Override
 	public double[] activations(double[] triggers) {
 		double[] outputs = new double[triggers.length];
-		double div = 0;
+		double exp = 0;
 		for (int i = 0; i < triggers.length; i++) {
-			double p = Numbers.bound(Math.exp(triggers[i]));
-			outputs[i] = p;
-			div += p;
-		}
-		if (div != 0) {
-			for (int i = 0; i < triggers.length; i++) {
-				outputs[i] /= div;
-			}
+			exp = Math.exp(-(sigma * triggers[i]));
+			outputs[i] = 1 / (1 + exp);
 		}
 		return outputs;
 	}
@@ -54,10 +50,12 @@ public class SoftMax extends Activation {
 	@Override
 	public double[] derivatives(double[] outputs) {
 		double[] derivatives = new double[outputs.length];
+		double out = 0;
 		for (int i = 0; i < outputs.length; i++) {
-			derivatives[i] = 1.0;
+			out = outputs[i];
+			derivatives[i] = sigma * out * (1 - out);
 		}
 		return derivatives;
 	}
-
+	
 }

@@ -74,13 +74,12 @@ public class Network {
 		/* Validate initialized and sizes. */
 		checkInitialized();
 		checkSizes(outputDeltasList.size(), outputEdges.size());
-		
+
 		/* Push backward output deltas. */
 		for (int i = 0; i < outputDeltasList.size(); i++) {
 			double[] outputDeltas = outputDeltasList.get(i);
 			outputEdges.get(i).pushBackward(outputDeltas);
 		}
-
 
 		/* Push backward layers. */
 		for (int i = layers.size() - 1; i >= 0; i--) {
@@ -130,6 +129,19 @@ public class Network {
 	 * @return The list of output edges.
 	 */
 	public List<Edge> getOutputEdges() { return Collections.unmodifiableList(outputEdges); }
+
+	/**
+	 * Returns the list of output values of the network, normally required after a <i>forward()</i>
+	 * call.
+	 * @return The list of output values.
+	 */
+	public List<double[]> getOutputValues() {
+		List<double[]> outputValues = new ArrayList<>();
+		for (Edge edge : outputEdges) {
+			outputValues.add(edge.getForwardValues());
+		}
+		return outputValues;
+	}
 
 	/**
 	 * Initialize the network. This method must be called after adding all the cells and wires, and
@@ -223,23 +235,23 @@ public class Network {
 			throw new IllegalArgumentException("Sizes do not match.");
 		}
 	}
-	
+
 	/**
 	 * Restore the network from a JSONObject.
 	 * @param net The object.
 	 */
 	public void fromJSONObject(JSONObject net) {
-		
+
 		/* Read the cells. */
 		JSONArray arr_cells = net.get("cells").getArray();
 		for (int i = 0; i < arr_cells.size(); i++) {
-			
+
 			JSONObject cell_obj = arr_cells.get(i).getObject();
 			String cell_uuid = cell_obj.get("uuid").getString();
 			String cell_name = cell_obj.get("name").getString();
-			
+
 			Cell cell = new Cell(UUID.fromString(cell_uuid), cell_name);
-			
+
 			JSONArray arr_nodes = cell_obj.get("nodes").getArray();
 			for (int j = 0; j < arr_nodes.size(); j++) {
 				JSONObject node_obj = arr_nodes.get(j).getObject();
@@ -256,10 +268,10 @@ public class Network {
 				}
 				cell.putNode(node);
 			}
-			
+
 			cells.put(cell, cell);
 		}
-		
+
 		/* Build a map with all nodes by string UUID. */
 		Map<String, Node> nodes = new HashMap<>();
 		for (Cell cell : cells.values()) {
@@ -267,7 +279,7 @@ public class Network {
 				nodes.put(node.getUUID().toString(), node);
 			}
 		}
-		
+
 		/* Read edges and wire. */
 		JSONArray arr_edges = net.get("edges").getArray();
 		for (int i = 0; i < arr_edges.size(); i++) {
@@ -292,7 +304,7 @@ public class Network {
 				}
 			}
 		}
-		
+
 		/* Initialize. */
 		initialize();
 	}

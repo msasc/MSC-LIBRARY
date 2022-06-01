@@ -12,9 +12,9 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.msasc.lib.ml.funtion.activation;
+package com.msasc.lib.ml.function.activation;
 
-import com.msasc.lib.ml.funtion.Activation;
+import com.msasc.lib.ml.function.Activation;
 
 /**
  * Bipolar sigmoid activation.

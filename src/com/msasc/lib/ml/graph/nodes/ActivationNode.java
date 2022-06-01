@@ -20,7 +20,7 @@ import java.util.UUID;
 
 import com.msasc.lib.json.JSONObject;
 import com.msasc.lib.json.JSONTypes;
-import com.msasc.lib.ml.funtion.Activation;
+import com.msasc.lib.ml.function.Activation;
 import com.msasc.lib.ml.graph.Edge;
 import com.msasc.lib.ml.graph.Node;
 

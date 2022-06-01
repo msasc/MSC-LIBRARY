@@ -32,7 +32,6 @@ import com.msasc.lib.util.iterators.ArrayIterator;
 public class Lists {
 	/**
 	 * Returns a list given the argument array.
-	 *
 	 * @param <T>   The type.
 	 * @param array The array.
 	 * @return The list.
@@ -50,7 +49,6 @@ public class Lists {
 	}
 	/**
 	 * Compares two lists of the same size.
-	 *
 	 * @param <T>        The type to compare.
 	 * @param list1      First list.
 	 * @param list2      Second list.
@@ -69,7 +67,6 @@ public class Lists {
 	}
 	/**
 	 * Check whether two lists are equal.
-	 *
 	 * @param l1 List 1.
 	 * @param l2 List 2.
 	 * @return A boolean.
@@ -84,7 +81,32 @@ public class Lists {
 		}
 		return true;
 	}
+
 	/**
+	 * Return the first element of a collection.
+	 * @param <T>        The type of the collection elements.
+	 * @param collection The collection.
+	 * @return The first element.
+	 */
+	public static <T> T getFirst(Collection<T> collection) {
+		Iterator<T> i = collection.iterator();
+		if (i.hasNext()) return i.next();
+		return null;
+	}
+
+	/**
+	 * Returns the first element of a list.
+	 * @param <T>  The type.
+	 * @param list The list.
+	 * @return The first element.
+	 */
+	public static <T> T getFirst(List<T> list) {
+		if (list == null || list.isEmpty()) return null;
+		return list.get(0);
+	}
+
+	/**
+	 * /**
 	 * Returns the last element of a list.
 	 *
 	 * @param <T>  The type.
@@ -98,7 +120,6 @@ public class Lists {
 
 	/**
 	 * Check in the list.
-	 *
 	 * @param <T>    The type to check.
 	 * @param value  The value to check.
 	 * @param values The list of values.
@@ -110,7 +131,6 @@ public class Lists {
 
 	/**
 	 * Check in the list.
-	 *
 	 * @param <T>    The type to check in.
 	 * @param value  The value to check.
 	 * @param values The list of values.
@@ -127,7 +147,6 @@ public class Lists {
 	}
 	/**
 	 * Remove the last element in the list.
-	 *
 	 * @param <T>  The type.
 	 * @param list The list.
 	 * @return The removed element.
@@ -135,6 +154,26 @@ public class Lists {
 	public static <T> T removeLast(List<T> list) {
 		return list.remove(list.size() - 1);
 	}
+
+	/**
+	 * Reverse the list.
+	 * @param <T>  The type.
+	 * @param list The list to reverse.
+	 */
+	public static <T> void reverse(List<T> list) {
+		int size = list.size();
+		int head;
+		int tail;
+		for (int i = 0; i < size; i++) {
+			head = i;
+			tail = size - head - 1;
+			if (tail < head) break;
+			T e = list.get(head);
+			list.set(head, list.get(tail));
+			list.set(tail, e);
+		}
+	}
+
 	/**
 	 * Return a comma separated list of the values converted to string.
 	 * @param <T>    The type.

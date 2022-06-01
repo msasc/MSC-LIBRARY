@@ -17,34 +17,34 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.msasc.lib.ml.funtion.activation;
+package com.msasc.lib.ml.function.activation;
 
-import com.msasc.lib.ml.funtion.Activation;
+import com.msasc.lib.ml.function.Activation;
 
 /**
- * ReLU activation.
+ * TANH activation.
+ *
  * @author Miquel Sas
  */
-public class ReLU extends Activation {
-
-	/** Leaky alpha. */
-	private double alpha = 0.1;
+public class TANH extends Activation {
 
 	/**
 	 * Constructor.
 	 */
-	public ReLU() {}
+	public TANH() {}
 
 	/**
-	 * Apply activation.
+	 * Apply activations.
 	 */
 	@Override
 	public double[] activations(double[] triggers) {
 		double[] outputs = new double[triggers.length];
+		double epos = 0;
+		double eneg = 0;
 		for (int i = 0; i < triggers.length; i++) {
-			double trigger = triggers[i];
-			double output = (trigger <= 0 ? alpha * trigger : trigger);
-			outputs[i] = output;
+			epos = Math.exp(triggers[i]);
+			eneg = Math.exp(-triggers[i]);
+			outputs[i] = (epos - eneg) / (epos + eneg);
 		}
 		return outputs;
 	}
@@ -56,7 +56,7 @@ public class ReLU extends Activation {
 	public double[] derivatives(double[] outputs) {
 		double[] derivatives = new double[outputs.length];
 		for (int i = 0; i < outputs.length; i++) {
-			derivatives[i] = (alpha == 0.0 ? 0.0 : 1.0);
+			derivatives[i] = (1.0 + outputs[i]) * (1 - outputs[i]);
 		}
 		return derivatives;
 	}

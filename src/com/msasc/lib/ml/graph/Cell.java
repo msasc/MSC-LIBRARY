@@ -26,7 +26,7 @@ import java.util.UUID;
 import com.msasc.lib.json.JSONArray;
 import com.msasc.lib.json.JSONObject;
 import com.msasc.lib.json.JSONTypes;
-import com.msasc.lib.ml.funtion.Activation;
+import com.msasc.lib.ml.function.Activation;
 import com.msasc.lib.ml.graph.nodes.ActivationNode;
 import com.msasc.lib.ml.graph.nodes.BiasNode;
 import com.msasc.lib.ml.graph.nodes.WeightsNode;
