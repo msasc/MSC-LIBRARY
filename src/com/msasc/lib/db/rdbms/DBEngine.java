@@ -191,17 +191,17 @@ public class DBEngine {
 		try {
 			if (progress != null) {
 				progress.notityStart();
-				progress.setIndeterminate(true);
-				progress.notifyProgress("Preparing");
+				progress.setIndeterminate(0, true);
+				progress.notifyMessage(0, "Preparing");
 				totalWork = execSelectCount(sql);
 			}
 			iter.select(sql, fields);
-			if (progress != null) progress.setIndeterminate(false);
+			if (progress != null) progress.setIndeterminate(0, false);
 			RecordList recordSet = new RecordList();
 			recordSet.setFieldList(fields);
 			while (iter.hasNext()) {
 				if (progress != null) {
-					progress.notifyProgress("Retrieving", 1.0, totalWork);
+					progress.notifyProgress(0, 1.0, totalWork);
 				}
 				recordSet.add(iter.next());
 			}
@@ -240,8 +240,8 @@ public class DBEngine {
 			st = cn.createStatement();
 
 			if (progress != null) {
-				progress.setIndeterminate(true);
-				progress.notifyProgress("Preparing");
+				progress.setIndeterminate(0, true);
+				progress.notifyMessage(0, "Preparing");
 				rs = st.executeQuery("SELECT COUNT(*) FROM (" + sql + ") AS COUNTER");
 				if (rs.next()) {
 					totalWork = rs.getDouble(1);
@@ -252,7 +252,7 @@ public class DBEngine {
 			rs = st.executeQuery(sql);
 
 			if (progress != null) {
-				progress.setIndeterminate(false);
+				progress.setIndeterminate(0, false);
 			}
 
 			RecordList recordSet = new RecordList();
@@ -260,7 +260,8 @@ public class DBEngine {
 			while (rs.next()) {
 
 				if (progress != null) {
-					progress.notifyProgress("Retrieving", 1.0, totalWork);
+					progress.notifyMessage(0, "Retrieving");
+					progress.notifyProgress(0, 1.0, totalWork);
 				}
 
 				Record record = readRecord(rs, fields);

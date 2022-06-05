@@ -28,7 +28,7 @@ import com.msasc.lib.util.Vector;
  * 
  * @author Miquel Sas
  */
-public class Metrics {
+public class SLMetrics {
 
 	/** M-Squared vector. */
 	private List<double[]> errors;
@@ -58,7 +58,7 @@ public class Metrics {
 	 * @param size    Size or number of patterns to process in one epoch.
 	 * @param lengths List of lengths of the arrays of pattern and network output.
 	 */
-	public Metrics(String label, int... lengths) {
+	public SLMetrics(String label, int... lengths) {
 		if (lengths == null || lengths.length == 0) throw new IllegalArgumentException();
 		this.label = label;
 		this.lengths = lengths;

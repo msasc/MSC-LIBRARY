@@ -17,7 +17,8 @@
 package com.msasc.lib.task.progress;
 
 /**
- * Listener of the progress of tasks and processes.
+ * Listener of the progress of tasks and processes. Note that progress bar zero is the main progress
+ * bar that indicates whether the whole listener is determinate or not.
  * @author Miquel Sas
  */
 public interface ProgressListener {
@@ -31,22 +32,29 @@ public interface ProgressListener {
 	void notifyEnd();
 	/**
 	 * Notify a progress message, normally when the task is indeterminate.
-	 * @param message  The message.
-	 * @param messages Optional additional messages.
+	 * @param index   The message index.
+	 * @param message The message.
 	 */
-	void notifyProgress(String message, String... messages);
+	void notifyMessage(int index, String message);
 	/**
 	 * Notify an increase in the work done. Zero or negative work increases or total work are not
-	 * considered and skipped.
-	 * @param message      User message.
+	 * considered and skipped. Additionally, in an indeterminate state, work and total are also
+	 * skipped.
+	 * @param index        Progress bar index.
 	 * @param workIncrease Work increase.
 	 * @param totalWork    Total work.
-	 * @param messages     Optional additional messages.
 	 */
-	void notifyProgress(String message, double workIncrease, double totalWork, String... messages);
+	void notifyProgress(int index, double workIncrease, double totalWork);
 	/**
-	 * Set that the task is indeterminate.
+	 * Set that the progress bar is indeterminate.
+	 * @param index         The index of the progress bar.
 	 * @param indeterminate A boolean.
 	 */
-	void setIndeterminate(boolean indeterminate);
+	void setIndeterminate(int index, boolean indeterminate);
+	/**
+	 * Initialize and setup the listener to manage the argument number of labels and progress bars.
+	 * @param numLabels Number of labels.
+	 * @param numBars   Number of progress bars.
+	 */
+	void setup(int numLabels, int numBars);
 }

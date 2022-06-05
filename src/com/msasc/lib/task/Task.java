@@ -34,7 +34,7 @@ public abstract class Task implements Runnable, Callable<Void> {
 	 * Check the list of tasks and the first non null exception if any.
 	 * @param tasks List of tasks.
 	 */
-	public static void check(Collection<Task> tasks) throws Throwable {
+	public static void check(Collection<? extends Task> tasks) throws Throwable {
 		for (Task task : tasks) {
 			if (task.exception != null) {
 				throw task.exception;
