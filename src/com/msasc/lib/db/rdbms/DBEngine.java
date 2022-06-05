@@ -201,6 +201,7 @@ public class DBEngine {
 			recordSet.setFieldList(fields);
 			while (iter.hasNext()) {
 				if (progress != null) {
+					progress.notifyMessage(0, "Reading");
 					progress.notifyProgress(0, 1.0, totalWork);
 				}
 				recordSet.add(iter.next());
@@ -212,78 +213,6 @@ public class DBEngine {
 			if (progress != null) progress.notifyEnd();
 			exc.printStackTrace();
 			return null;
-		}
-	}
-	/**
-	 * Execute a select query and return the corresponding recordset.
-	 * @param sql      The select query.
-	 * @param fields   The corresponding list of fields.
-	 * @param progress A progress listener to report the progress of the operation.
-	 * @return The recordset
-	 * @throws SQLException If such an error occurs.
-	 */
-	public RecordSet execSelectRecordSet2(String sql, FieldList fields, ProgressListener progress) throws SQLException {
-
-		DBConnection cn = null;
-		DBStatement st = null;
-		DBResultSet rs = null;
-
-		double totalWork = 0;
-
-		try {
-
-			if (progress != null) {
-				progress.notityStart();
-			}
-
-			cn = getConnection();
-			st = cn.createStatement();
-
-			if (progress != null) {
-				progress.setIndeterminate(0, true);
-				progress.notifyMessage(0, "Preparing");
-				rs = st.executeQuery("SELECT COUNT(*) FROM (" + sql + ") AS COUNTER");
-				if (rs.next()) {
-					totalWork = rs.getDouble(1);
-				}
-				rs.close();
-			}
-
-			rs = st.executeQuery(sql);
-
-			if (progress != null) {
-				progress.setIndeterminate(0, false);
-			}
-
-			RecordList recordSet = new RecordList();
-			recordSet.setFieldList(fields);
-			while (rs.next()) {
-
-				if (progress != null) {
-					progress.notifyMessage(0, "Retrieving");
-					progress.notifyProgress(0, 1.0, totalWork);
-				}
-
-				Record record = readRecord(rs, fields);
-				recordSet.add(record);
-			}
-
-			if (progress != null) {
-				progress.notifyEnd();
-			}
-
-			return recordSet;
-
-		} catch (Exception exc) {
-			if (progress != null) {
-				progress.notifyEnd();
-			}
-			exc.printStackTrace();
-			return null;
-		} finally {
-			if (rs != null && !rs.isClosed()) rs.close();
-			if (st != null && !st.isClosed()) st.close();
-			if (cn != null && !cn.isClosed()) cn.close();
 		}
 	}
 	/**
