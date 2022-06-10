@@ -40,8 +40,8 @@ import javafx.stage.Screen;
 import javafx.stage.Window;
 
 /**
+ * FX utilities.
  * @author Miquel Sas
- *
  */
 public class FX {
 	/**

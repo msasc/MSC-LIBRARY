@@ -118,7 +118,6 @@ public class Properties {
 	public <T> List<T> getList(Object key) { return (List<T>) properties.get(key); }
 	/**
 	 * Return a stored typed map.	
-	 * @param <K, V> The type of the keys and values of the map.
 	 * @param key The key.
 	 * @return The typed map.
 	 */

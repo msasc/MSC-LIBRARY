@@ -19,8 +19,9 @@ import java.util.List;
 import com.msasc.lib.util.Lists;
 
 /**
- * Startup or command line argument to help the management, i.e. validation and reading in any order, of the
- * <tt>main</tt> arguments or parameters in a JNLP file in the form of <name,value>. Examples of arguments are:
+ * Startup or command line argument to help the management, i.e. validation and reading in any
+ * order, of the <code>main</code> arguments or parameters in a JNLP file in the form of (name,value).
+ * Examples of arguments are:
  * <ul>
  * <li>unnamed</li>
  * <li>name=value</li>
@@ -135,58 +136,43 @@ public class Argument {
 	 * 
 	 * @return The description.
 	 */
-	public String getDescription() {
-		return description;
-	}
+	public String getDescription() { return description; }
 
 	/**
 	 * Returns the name.
 	 * 
 	 * @return The name.
 	 */
-	public String getName() {
-		return name;
-	}
+	public String getName() { return name; }
 
 	/**
 	 * Returns the array of possible values.
 	 * 
 	 * @return The possibleValues.
 	 */
-	public List<String> getPossibleValues() {
-		return possibleValues;
-	}
+	public List<String> getPossibleValues() { return possibleValues; }
 
 	/**
 	 * Checks if the argument is required.
 	 * 
 	 * @return A boolean.
 	 */
-	public boolean isRequired() {
-		return required;
-	}
+	public boolean isRequired() { return required; }
 
 	/**
 	 * Checks if the argument requires at least a value.
 	 * 
 	 * @return A boolean.
 	 */
-	public boolean isValuesRequired() {
-		return valuesRequired;
-	}
+	public boolean isValuesRequired() { return valuesRequired; }
 
 	/**
 	 * Checks if the argument accepts multiple values.
 	 * 
 	 * @return A boolean.
 	 */
-	public boolean isMultipleValues() {
-		return multipleValues;
-	}
+	public boolean isMultipleValues() { return multipleValues; }
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String toString() {
 		StringBuilder b = new StringBuilder();

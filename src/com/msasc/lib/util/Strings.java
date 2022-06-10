@@ -419,7 +419,7 @@ public class Strings {
 	}
 	/**
 	 * Parse CSS styles (with ; as separator)
-	 * @param styleArray The list of styles.
+	 * @param styles The list of styles.
 	 * @return A list of styles.
 	 */
 	public static List<String> parseCSS(List<String> styles) {

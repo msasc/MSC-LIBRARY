@@ -55,7 +55,6 @@ public class SLMetrics {
 	/**
 	 * Constructor.
 	 * @param label   Label to name the series of metrics being processed.
-	 * @param size    Size or number of patterns to process in one epoch.
 	 * @param lengths List of lengths of the arrays of pattern and network output.
 	 */
 	public SLMetrics(String label, int... lengths) {

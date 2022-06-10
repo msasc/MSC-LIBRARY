@@ -39,6 +39,63 @@ import com.msasc.lib.ml.graph.nodes.WeightsNode;
 public class Cell {
 
 	/**
+	 * Connect two cells.
+	 * @param cellIn  Input cell.
+	 * @param cellOut Output cell.
+	 */
+	public static void connect(Cell cellIn, Cell cellOut) {
+
+		/* Output edges of the input cell and input edges of the output cell. */
+		List<Edge> edgesOut = cellIn.getOutputEdges();
+		List<Edge> edgesIn = cellOut.getInputEdges();
+		
+		/* Validate number of edges. */
+		if (cellIn.getOutputEdges().size() != cellOut.getInputEdges().size()) {
+			throw new IllegalArgumentException("Invalid in-out number of edges");
+		}
+		
+		int numEdges = edgesOut.size();
+		
+		/* Validate sizes of edges. */
+		for (int i = 0; i < numEdges; i++) {
+			Edge edgeOut = edgesOut.get(i);
+			Edge edgeIn = edgesIn.get(i);
+			if (edgeOut.size() != edgeIn.size()) {
+				throw new IllegalArgumentException("Invalid edge sizes");
+			}
+		}
+		
+		/* Do connect. */
+		for (int i = 0; i < numEdges; i++) {
+			
+			/* Edges out and in. */
+			Edge edgeOut = cellIn.getOutputEdges().get(i);
+			Edge edgeIn = cellOut.getInputEdges().get(i);
+			
+			/* Connection edge. */
+			Node nodeOut = edgeOut.getInputNode();
+			Node nodeIn = edgeIn.getOutputNode();
+			Edge edge = new Edge(edgeOut.size());
+			edge.setInputNode(nodeOut);
+			edge.setOutputNode(nodeIn);
+			
+			/* Replace edges out and in by the connect edge. */
+			for (int j = 0; j < nodeOut.getOutputEdges().size(); j++) {
+				if (nodeOut.getOutputEdges().get(j).equals(edgeOut)) {
+					nodeOut.getOutputEdges().set(j, edge);
+					break;
+				}
+			}
+			for (int j = 0; j < nodeIn.getInputEdges().size(); j++) {
+				if (nodeIn.getInputEdges().get(j).equals(edgeIn)) {
+					nodeIn.getInputEdges().set(j, edge);
+					break;
+				}
+			}
+		}
+	}
+
+	/**
 	 * Creates a generic RNN cell definition that can range from a simple BP cell without bias, up
 	 * to a RNN cell with bias.
 	 * 
@@ -149,8 +206,14 @@ public class Cell {
 		List<Edge> edges = new ArrayList<>();
 		for (Node node : nodes.values()) {
 			for (Edge edge : node.getInputEdges()) {
-				if (edge.isInput()) edges.add(edge);
-				if (!edge.getInputNode().getCell().equals(this)) edges.add(edge);
+				if (edge.isInput()) {
+					edges.add(edge);
+					continue;
+				}
+				if (!edge.getInputNode().getCell().equals(this)) {
+					edges.add(edge);
+					continue;
+				}
 			}
 		}
 		return edges;
@@ -164,8 +227,14 @@ public class Cell {
 		List<Edge> edges = new ArrayList<>();
 		for (Node node : nodes.values()) {
 			for (Edge edge : node.getOutputEdges()) {
-				if (edge.isOutput()) edges.add(edge);
-				if (!edge.getOutputNode().getCell().equals(this)) edges.add(edge);
+				if (edge.isOutput()) {
+					edges.add(edge);
+					continue;
+				}
+				if (!edge.getOutputNode().getCell().equals(this)) {
+					edges.add(edge);
+					continue;
+				}
 			}
 		}
 		return edges;

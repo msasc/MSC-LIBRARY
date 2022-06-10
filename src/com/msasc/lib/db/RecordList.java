@@ -59,7 +59,6 @@ public class RecordList extends RecordSet {
 	/**
 	 * Add a record to the list.
 	 * @param record The record to add
-	 * @return A boolean indicating if the record has been added.
 	 */
 	public void add(Record record) {
 		if (getFieldList() == null) setFieldList(record.getFields());
@@ -201,9 +200,6 @@ public class RecordList extends RecordSet {
 	 */
 	public Record[] toArray() { return records.toArray(new Record[records.size()]); }
 
-	/**
-	 * Return the iterator.
-	 */
 	@Override
 	public Iterator<Record> iterator() { return records.iterator(); }
 
@@ -214,9 +210,6 @@ public class RecordList extends RecordSet {
 	 */
 	public boolean isSortable() { return true; }
 
-	/**
-	 * To string.
-	 */
 	@Override
 	public String toString() {
 		StringBuilder b = new StringBuilder();

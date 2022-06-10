@@ -156,8 +156,8 @@ public abstract class Filter extends SQL {
 
 	/**
 	 * Add the first segment condition of type null option.
-	 * @param field  The field.
-	 * @param nullOp The is null operator.
+	 * @param field   The field.
+	 * @param null_op The is null operator.
 	 */
 	public void condition(Field field, String null_op) {
 		condition(field.getNameParent(), null_op);
@@ -236,9 +236,9 @@ public abstract class Filter extends SQL {
 
 	/**
 	 * Add an EXISTS condition with en entire SELECT object.
-	 * @param log_op
-	 * @param exists_op
-	 * @param select
+	 * @param log_op    Logical operator.
+	 * @param exists_op Exists operator.
+	 * @param select    Select query.
 	 */
 	public void condition(String log_op, String exists_op, Select select) {
 		validate(log_op, log_ops);

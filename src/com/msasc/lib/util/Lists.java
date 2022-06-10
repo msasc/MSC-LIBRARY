@@ -184,8 +184,7 @@ public class Lists {
 	public static <T> String toString(T... values) { return toString(new ArrayIterator<T>(values)); }
 	/**
 	 * Return a comma separated list of the values converted to string.
-	 * @param <T>    The type.
-	 * @param values The list of values.
+	 * @param iterator The iterator.
 	 * @return The comma separated list.
 	 */
 	public static <T> String toString(Iterator<T> iterator) {

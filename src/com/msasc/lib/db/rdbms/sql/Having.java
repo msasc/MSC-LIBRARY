@@ -32,7 +32,6 @@ public class Having extends Filter {
 
 	/**
 	 * Add an entire HAVING clause.
-	 * @param logOp The logical operator to chain the first segment.
 	 * @param having The HAVING clause to add.
 	 */
 	public void having(Having having) { filter(having); }

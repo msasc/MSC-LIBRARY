@@ -140,9 +140,6 @@ public abstract class RecordSet implements Iterable<Record> {
 	 */
 	public abstract boolean isEmpty();
 
-	/**
-	 * Return the iterator.
-	 */
 	@Override
 	public abstract Iterator<Record> iterator();
 
@@ -163,9 +160,6 @@ public abstract class RecordSet implements Iterable<Record> {
 	 */
 	public abstract int size();
 
-	/**
-	 * To string.
-	 */
 	@Override
 	public String toString() {
 		StringBuilder b = new StringBuilder();

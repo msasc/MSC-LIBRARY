@@ -186,11 +186,6 @@ public class FieldList implements Iterable<Field> {
 	 */
 	public boolean containsKey(String key) { return indexes.containsKey(key); }
 
-	/**
-	 * Check equality.
-	 * @param obj The reference object with which to compare.
-	 * @return A boolean
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) return true;
@@ -198,10 +193,6 @@ public class FieldList implements Iterable<Field> {
 		FieldList fieldList = (FieldList) obj;
 		return fields.equals(fieldList.fields);
 	}
-	/**
-	 * Returns a suitable hash code.
-	 * @return A suitable hash code.
-	 */
 	@Override
 	public int hashCode() {
 		int hash = 5;
@@ -209,9 +200,6 @@ public class FieldList implements Iterable<Field> {
 		return hash;
 	}
 
-	/**
-	 * Returns an iterator over the list of fields.
-	 */
 	@Override
 	public Iterator<Field> iterator() { return fields.iterator(); }
 

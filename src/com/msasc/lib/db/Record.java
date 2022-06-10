@@ -440,9 +440,6 @@ public class Record {
 	 */
 	public final Value[] values() { return values; }
 
-	/**
-	 * To string.
-	 */
 	@Override
 	public String toString() {
 		StringBuilder b = new StringBuilder();

@@ -201,5 +201,8 @@ public abstract class Task implements Runnable, Callable<Void> {
 	/**
 	 * Reinitialize the task setting its state to ready.
 	 */
-	public void reinitialize() { setState(State.READY); }
+	public void reinitialize() {
+		cancelRequested.set(false);
+		setState(State.READY);
+	}
 }

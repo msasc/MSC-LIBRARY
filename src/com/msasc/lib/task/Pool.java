@@ -174,7 +174,7 @@ public class Pool {
 	}
 	/**
 	 * Wait for termination of the group of tasks submitted.
-	 * @param tasks The group of tasks to wait for their termination.
+	 * @param group The group of tasks to wait for their termination.
 	 */
 	public void waitForTermination(Group group) { waitForTermination(group.tasks()); }
 }

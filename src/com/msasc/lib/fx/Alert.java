@@ -16,6 +16,8 @@
  */
 package com.msasc.lib.fx;
 
+import com.msasc.lib.util.HTML;
+
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -79,12 +81,6 @@ public class Alert {
 		textFlow.getChildren().add(text);
 	}
 
-	public void clearContentText() {
-		if (!contentType.equals("TEXT")) throw new IllegalStateException("Content type is not text flow");
-		TextFlow textFlow = (TextFlow) dialog.getCenter();
-		textFlow.getChildren().clear();
-	}
-
 	/**
 	 * Add a header text with a CSS style.
 	 * @param text The text.
@@ -138,6 +134,12 @@ public class Alert {
 	}
 	/**
 	 * Set the content to be a WebView control.
+	 * @param html The HTML object.
+	 */
+	public void setContentHTML(HTML html) { setContentHTML(html.toString()); }
+	/**
+	 * Set the content to be a WebView control.
+	 * @param html The HTML string.
 	 */
 	public void setContentHTML(String html) {
 		WebView webView = new WebView();
@@ -145,7 +147,10 @@ public class Alert {
 		dialog.setCenter(webView);
 		contentType = "HTML";
 	}
-
+	/**
+	 * Set the title.
+	 * @param title The title.
+	 */
 	public void setTitle(String title) { dialog.getStage().setTitle(title); }
 
 	public void setTypeConfirmation() { setType("CONFIRMATION"); }

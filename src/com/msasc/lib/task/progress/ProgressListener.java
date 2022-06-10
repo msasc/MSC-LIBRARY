@@ -16,6 +16,8 @@
  */
 package com.msasc.lib.task.progress;
 
+import com.msasc.lib.task.State;
+
 /**
  * Listener of the progress of tasks and processes. Note that progress bar zero is the main progress
  * bar that indicates whether the whole listener is determinate or not.
@@ -25,7 +27,7 @@ public interface ProgressListener {
 	/**
 	 * Notify that the calling task has started.
 	 */
-	void notityStart();
+	void notifyStart();
 	/**
 	 * Notify that the calling task has finished.
 	 */
@@ -46,11 +48,21 @@ public interface ProgressListener {
 	 */
 	void notifyProgress(int index, double workIncrease, double totalWork);
 	/**
+	 * Notify the state.
+	 * @param state The state.
+	 */
+	void notifyState(State state);
+	/**
 	 * Set that the progress bar is indeterminate.
 	 * @param index         The index of the progress bar.
 	 * @param indeterminate A boolean.
 	 */
 	void setIndeterminate(int index, boolean indeterminate);
+	/**
+	 * Reset the progress bar to zero work done.
+	 * @param index The index of the progress bar.
+	 */
+	void resetProgress(int index);
 	/**
 	 * Initialize and setup the listener to manage the argument number of labels and progress bars.
 	 * @param numLabels Number of labels.

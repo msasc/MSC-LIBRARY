@@ -58,9 +58,6 @@ public class Order {
 		 * @return A boolean that indicates whether the key is ascending or descending.
 		 */
 		public boolean isAscending() { return asc; }
-		/**
-		 * Check equals.
-		 */
 		@Override
 		public boolean equals(Object obj) {
 			if (obj instanceof Segment) {
@@ -69,9 +66,6 @@ public class Order {
 			}
 			return false;
 		}
-		/**
-		 * Hash code.
-		 */
 		@Override
 		public int hashCode() { return (field.hashCode() + Boolean.valueOf(asc).hashCode()); }
 
@@ -112,9 +106,6 @@ public class Order {
 	 */
 	public List<Segment> getSegments() { return segments; }
 
-	/**
-	 * Check equals.
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Order) {
@@ -123,15 +114,8 @@ public class Order {
 		}
 		return false;
 	}
-	/**
-	 * Hash code.
-	 */
 	@Override
 	public int hashCode() { return segments.hashCode(); }
-	
-	/**
-	 * Returns a string representation.
-	 */
 	@Override
 	public String toString() { return toJSONObject().toString(); }
 	/**

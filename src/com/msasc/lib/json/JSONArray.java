@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
+ * JSON array.
  * @author Miquel Sas
  */
 public class JSONArray implements Iterable<JSONEntry> {

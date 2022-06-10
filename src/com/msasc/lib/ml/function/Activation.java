@@ -31,6 +31,16 @@ import com.msasc.lib.ml.function.activation.TANH;
  * @author Miquel Sas
  */
 public abstract class Activation {
+	/** Singleton BipolarSigmoid activation. */
+	public static final Activation BIPOLAR_SIGMOID = new BipolarSigmoid();
+	/** Singleton bipolar ReLU. */
+	public static final Activation RELU = new ReLU();
+	/** Singleton Sigmoid activation. */
+	public static final Activation SIGMOID = new Sigmoid();
+	/** Singleton SoftMax activation. */
+	public static final Activation SOFT_MAX = new SoftMax();
+	/** Singleton TANH activation. */
+	public static final Activation TANH = new TANH();
 
 	/**
 	 * Return the function given the name in a restore operation.
@@ -45,6 +55,11 @@ public abstract class Activation {
 		if (name.equals(TANH.class.getSimpleName())) return new TANH();
 		throw new IllegalArgumentException("Invalid ativation name: " + name);
 	}
+
+	/**
+	 * Default constructor.
+	 */
+	protected Activation() {}
 
 	/**
 	 * Return an identification id of this activation function.

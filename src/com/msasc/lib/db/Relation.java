@@ -54,9 +54,6 @@ public class Relation {
 			this.foreignField = foreignField;
 		}
 
-		/**
-		 * Check equality.
-		 */
 		@Override
 		public boolean equals(Object obj) {
 			if (!(obj instanceof Segment)) return false;
@@ -66,9 +63,6 @@ public class Relation {
 			equals &= getForeignField().equals(seg.getForeignField());
 			return equals;
 		}
-		/**
-		 * Return a proper hash code.
-		 */
 		@Override
 		public int hashCode() {
 			int hash = getLocalField().hashCode();
@@ -98,9 +92,6 @@ public class Relation {
 		 */
 		public void setForeignField(Field foreignField) { this.foreignField = foreignField; }
 
-		/**
-		 * Returns a string representation.
-		 */
 		@Override
 		public String toString() {
 			StringBuilder b = new StringBuilder(64);
@@ -153,9 +144,6 @@ public class Relation {
 	 */
 	public boolean containsForeignField(Field field) { return getForeignFieldIndex(field) >= 0; }
 
-	/**
-	 * Check equality.
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof Segment)) return false;
@@ -167,9 +155,6 @@ public class Relation {
 		equals &= getForeignTableAlias().equals(rel.getForeignTableAlias());
 		return equals;
 	}
-	/**
-	 * Return a proper hash code.
-	 */
 	@Override
 	public int hashCode() {
 		int hash = getLocalTable().hashCode();
@@ -275,9 +260,6 @@ public class Relation {
 	 */
 	public void setType(Relation.Type type) { this.type = type; }
 
-	/**
-	 * Return a string representation.
-	 */
 	@Override
 	public String toString() {
 		StringBuilder b = new StringBuilder(64);

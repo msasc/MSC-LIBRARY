@@ -95,9 +95,6 @@ public class Index extends Order {
 	 */
 	public void setUnique(boolean unique) { this.unique = unique; }
 
-	/**
-	 * Return a hash code.
-	 */
 	@Override
 	public int hashCode() {
 		int hash = 0;
@@ -108,9 +105,6 @@ public class Index extends Order {
 		return hash;
 	}
 
-	/**
-	 * Check equals.
-	 */
 	@Override
 	public boolean equals(Object o) {
 		if (o == null) {

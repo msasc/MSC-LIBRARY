@@ -190,7 +190,7 @@ public class DBEngine {
 		double totalWork = 0;
 		try {
 			if (progress != null) {
-				progress.notityStart();
+				progress.notifyStart();
 				progress.setIndeterminate(0, true);
 				progress.notifyMessage(0, "Preparing");
 				totalWork = execSelectCount(sql);

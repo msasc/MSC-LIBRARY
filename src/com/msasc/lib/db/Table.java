@@ -61,18 +61,12 @@ public class Table {
 	 */
 	public void addIndex(Index index) { indexes.add(index); }
 
-	/**
-	 * Check for equality.
-	 */
 	@Override
 	public boolean equals(Object o) {
 		if (o == null) return false;
 		if (getClass() != o.getClass()) return false;
 		return getNameFrom().equals(((Table) o).getNameFrom());
 	}
-	/**
-	 * Return a proper hash code.
-	 */
 	@Override
 	public int hashCode() { return getNameFrom().hashCode(); }
 

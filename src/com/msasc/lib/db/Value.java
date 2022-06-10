@@ -441,9 +441,6 @@ public class Value implements Comparable<Object> {
 	 */
 	public boolean isJSONObject() { return type.isJSONObject(); }
 
-	/**
-	 * Compare for order.
-	 */
 	@Override
 	public int compareTo(Object o) {
 
@@ -562,14 +559,8 @@ public class Value implements Comparable<Object> {
 
 		throw new IllegalStateException("Not comparable types");
 	}
-	/**
-	 * Check equals.
-	 */
 	@Override
 	public boolean equals(Object o) { return compareTo(o) == 0; }
-	/**
-	 * Returns the hash code.
-	 */
 	@Override
 	public int hashCode() { return Objects.hashCode(value); }
 
@@ -580,10 +571,6 @@ public class Value implements Comparable<Object> {
 	public JSONEntry toJSONEntry() {
 		return new JSONEntry(type.toJSONTypes(), value);
 	}
-	/**
-	 * Return a string representing this value content.
-	 * @return A string representing this value content.
-	 */
 	@Override
 	public String toString() {
 		if (value == null) return "null";

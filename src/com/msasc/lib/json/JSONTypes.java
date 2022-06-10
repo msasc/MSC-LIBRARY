@@ -17,6 +17,7 @@
 package com.msasc.lib.json;
 
 /**
+ * JSON types.
  * @author Miquel Sas
  */
 public enum JSONTypes {

@@ -32,8 +32,11 @@ import java.util.Locale;
  */
 public class Formats {
 
+	/** Standard date format. */
 	public static final DateTimeFormatter FORMAT_DATE = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	/** Standard time format. */
 	public static final DateTimeFormatter FORMAT_TIME = DateTimeFormatter.ofPattern("HH:mm:ss");
+	/** Standard datetime format. */
 	public static final DateTimeFormatter FORMAT_DATETIME = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 	/**
@@ -192,7 +195,7 @@ public class Formats {
 	 *
 	 * @param str The string.
 	 * @return The parsed date.
-	 * @throws DateTimeParseException
+	 * @throws DateTimeParseException If such an error occurs.
 	 */
 	public static LocalDate toDate(String str) throws DateTimeParseException {
 		return LocalDate.parse(str, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -203,7 +206,7 @@ public class Formats {
 	 *
 	 * @param str The string.
 	 * @return The parsed time.
-	 * @throws DateTimeParseException
+	 * @throws DateTimeParseException If such an error occurs.
 	 */
 	public static LocalTime toTime(String str) throws DateTimeParseException {
 		return LocalTime.parse(str, DateTimeFormatter.ofPattern("HH:mm:ss"));
@@ -214,7 +217,7 @@ public class Formats {
 	 *
 	 * @param str The string.
 	 * @return The parsed date-time.
-	 * @throws DateTimeParseException
+	 * @throws DateTimeParseException If such an error occurs.
 	 */
 	public static LocalDateTime toDateTime(String str) throws DateTimeParseException {
 		return LocalDateTime.parse(str, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));

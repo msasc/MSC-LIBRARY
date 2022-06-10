@@ -37,9 +37,6 @@ public class RecordComparator implements Comparator<Record> {
 		this.order = order;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int compare(Record r1, Record r2) {
 		OrderKey k1 = r1.getOrderKey(order);

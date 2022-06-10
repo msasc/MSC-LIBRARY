@@ -58,21 +58,21 @@ public class Insert extends SQL {
 
 	/**
 	 * Add the list of fields.
-	 * @param field The list of fields to add.
+	 * @param fields The list of fields to add.
 	 */
 	public void fields(Field... fields) {
 		for (Field field : fields) { this.fields.add(field.getName()); }
 	}
 	/**
 	 * Add the list of fields.
-	 * @param field The list of fields to add.
+	 * @param fields The list of fields to add.
 	 */
 	public void fields(List<Field> fields) {
 		for (Field field : fields) { this.fields.add(field.getName()); }
 	}
 	/**
 	 * Add the list of fields.
-	 * @param field The list of fields to add.
+	 * @param fields The list of fields to add.
 	 */
 	public void fields(String... fields) {
 		for (String field : fields) { this.fields.add(field); }

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.msasc.lib.fx;
+package com.msasc.lib.fx.progress;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -25,11 +25,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.locks.ReentrantLock;
 
+import com.msasc.lib.fx.FX;
+import com.msasc.lib.task.State;
 import com.msasc.lib.task.progress.ProgressListener;
 import com.msasc.lib.util.Numbers;
 import com.msasc.lib.util.Strings;
 
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -60,6 +63,8 @@ public class ProgressMonitor implements ProgressListener {
 	private Label labelWorkDone;
 	/** Label to show the total work. */
 	private Label labelTotalWork;
+	/** Label to show the state. */
+	private Label labelState;
 
 	/** List of progress bars to visually monitor progresses. */
 	private List<ProgressBar> progressBars;
@@ -174,6 +179,11 @@ public class ProgressMonitor implements ProgressListener {
 	 */
 	public Label getLabelEnd() { return labelEnd; }
 	/**
+	 * Return the state label.
+	 * @return The state label.
+	 */
+	public Label getLabelState() { return labelState; }
+	/**
 	 * Return the progress bar.
 	 * @param index The index of the progress bar.
 	 * @return The progress bar.
@@ -183,7 +193,7 @@ public class ProgressMonitor implements ProgressListener {
 	/**
 	 * Notify that the calling task has started. The timer is started and scheduled.
 	 */
-	public void notityStart() {
+	public void notifyStart() {
 		checkSetup();
 		try {
 			lock.lock();
@@ -256,6 +266,35 @@ public class ProgressMonitor implements ProgressListener {
 	}
 
 	/**
+	 * Notify the state.
+	 * @param state The state.
+	 */
+	@Override
+	public void notifyState(State state) { Platform.runLater(() -> labelState.textProperty().set(state.toString())); }
+
+	/**
+	 * Reset the progress bar to zero work done.
+	 * @param index The index of the progress bar.
+	 */
+	@Override
+	public void resetProgress(int index) {
+		try {
+			lock.lock();
+			worksDone.set(index, 0.0);
+			totalWorks.set(index, 0.0);
+		} finally {
+			lock.unlock();
+		}
+		Platform.runLater(() -> {
+			if (indeterminates.get(index)) {
+				progressBars.get(index).progressProperty().set(-1);
+			} else {
+				progressBars.get(index).progressProperty().set(0);
+			}
+		});
+	}
+
+	/**
 	 * Set that the progress bar is indeterminate.
 	 * @param index         The index of the progress bar.
 	 * @param indeterminate A boolean.
@@ -279,8 +318,32 @@ public class ProgressMonitor implements ProgressListener {
 	}
 
 	/**
-	 * Initialize and setup the listener to manage the argument number of labels and progress bars.
+	 * Set padding to all labels.
+	 * @param insets The padding insets.
 	 */
+	public void setPaddingToLabels(Insets insets) {
+		labelStart.setPadding(insets);
+		labelElapsed.setPadding(insets);
+		labelExpected.setPadding(insets);
+		labelEnd.setPadding(insets);
+		labelPercentage.setPadding(insets);
+		labelWorkDone.setPadding(insets);
+		labelTotalWork.setPadding(insets);
+		labelState.setPadding(insets);
+		for (Label label : labels) {
+			label.setPadding(insets);
+		}
+	}
+	/**
+	 * Set padding to all progress bars.
+	 * @param insets The padding insets.
+	 */
+	public void setPaddingToProgressBars(Insets insets) {
+		for (ProgressBar bar : progressBars) {
+			bar.setPadding(insets);
+		}
+	}
+
 	@Override
 	public void setup(int numLabels, int numBars) {
 
@@ -290,20 +353,29 @@ public class ProgressMonitor implements ProgressListener {
 		this.numLabels = numLabels;
 		this.numBars = numBars;
 
+		double width;
+
 		/* Time labels. */
+
+		labelState = new Label("");
+		labelState.idProperty().set("label-state");
+
 		labelStart = new Label("");
 		labelStart.idProperty().set("label-start");
+
 		labelElapsed = new Label("");
 		labelElapsed.idProperty().set("label-elapsed");
+
 		labelExpected = new Label("");
 		labelExpected.idProperty().set("label-expected");
+
 		labelEnd = new Label("");
 		labelEnd.idProperty().set("label-end");
 
 		/* Percentage label. */
 		labelPercentage = new Label("");
 		labelPercentage.idProperty().set("label-percentage");
-		double width = FX.getStringWidth("00100.0%", labelPercentage.getFont());
+		width = FX.getStringWidth("00100.0%", labelPercentage.getFont());
 		labelPercentage.minWidthProperty().set(width);
 		labelPercentage.alignmentProperty().set(Pos.CENTER_RIGHT);
 
@@ -367,7 +439,7 @@ public class ProgressMonitor implements ProgressListener {
 					str_start = timeStart.toLocalTime().truncatedTo(ChronoUnit.SECONDS).toString();
 				}
 				str_elapsed = Strings.toString(timeElapsed);
-				
+
 				str_expected = null;
 				str_end = null;
 
@@ -404,17 +476,17 @@ public class ProgressMonitor implements ProgressListener {
 					labels.get(i).textProperty().set(messages.get(i));
 				}
 			});
-			
+
 			for (int i = 0; i < numBars; i++) {
-				
+
 				/* Determinate. */
 				boolean indeterminate = (indeterminates.get(i) || totalWorks.get(i) == 0);
-				
+
 				final String str_percentage;
 				final String str_work_done;
 				final String str_total_work;
 				Double progressValue = null;
-				
+
 				if (indeterminate) {
 					str_percentage = null;
 					str_work_done = null;

@@ -33,10 +33,10 @@ import com.msasc.lib.util.resources.StringRes;
  * @author Miquel Sas
  */
 public class Field implements Comparable<Field> {
-	
+
 	/** Standard field alias (key) row number. */
 	public final static String ALIAS_ROW_NUMBER = "ROW_NUM";
-	
+
 	/**
 	 * Helper to rapidly create fields.
 	 * @param name        Field name.
@@ -162,9 +162,8 @@ public class Field implements Comparable<Field> {
 		this.properties = new FieldProperties(this);
 		this.properties.putAll(field.getProperties());
 	}
-
 	/**
-	 * Returns the comparison integer.
+	 * Compare for order.
 	 */
 	@Override
 	public int compareTo(Field field) {
@@ -179,9 +178,8 @@ public class Field implements Comparable<Field> {
 		}
 		return getAlias().compareTo(field.getAlias());
 	}
-
 	/**
-	 * Check equals.
+	 * Check equality.
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -509,9 +507,8 @@ public class Field implements Comparable<Field> {
 	 * @param view The parent view.
 	 */
 	public void setView(View view) { this.view = view; }
-
 	/**
-	 * Returns a string representation.
+	 * Return a string representation.
 	 */
 	@Override
 	public String toString() {

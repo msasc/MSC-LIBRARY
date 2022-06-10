@@ -36,7 +36,6 @@ public class OrderKey implements Comparable<Object> {
 
 	/** Segment comparator. */
 	public static class SegmentComparator implements Comparator<Segment> {
-		/** Compare. */
 		@Override
 		public int compare(Segment s1, Segment s2) {
 			int compare = s1.value.compareTo(s2.value);
@@ -65,9 +64,6 @@ public class OrderKey implements Comparable<Object> {
 			this.value = value;
 			this.asc = asc;
 		}
-		/**
-		 * Do compare.
-		 */
 		@Override
 		public int compareTo(Object o) {
 			if (o == null) throw new NullPointerException();
@@ -77,16 +73,10 @@ public class OrderKey implements Comparable<Object> {
 			}
 			throw new IllegalArgumentException("Not comparable type: " + o.getClass().getName());
 		}
-		/**
-		 * Equals.
-		 */
 		@Override
 		public boolean equals(Object o) {
 			return compareTo(o) == 0;
 		}
-		/**
-		 * Hash code.
-		 */
 		@Override
 		public int hashCode() {
 			int hash = 3;
@@ -120,9 +110,6 @@ public class OrderKey implements Comparable<Object> {
 			this.value = value;
 		}
 
-		/**
-		 * To string.
-		 */
 		@Override
 		public String toString() {
 			StringBuilder b = new StringBuilder(128);
@@ -186,9 +173,6 @@ public class OrderKey implements Comparable<Object> {
 	 */
 	public int size() { return segments.size(); }
 
-	/**
-	 * Compare.
-	 */
 	@Override
 	public int compareTo(Object o) {
 		if (o instanceof OrderKey) {
@@ -198,9 +182,6 @@ public class OrderKey implements Comparable<Object> {
 		throw new IllegalArgumentException();
 	}
 
-	/**
-	 * Hash code.
-	 */
 	@Override
 	public int hashCode() {
 		int hash = 1;
@@ -210,9 +191,6 @@ public class OrderKey implements Comparable<Object> {
 		return hash;
 	}
 
-	/**
-	 * Equals.
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof OrderKey) {
@@ -222,9 +200,6 @@ public class OrderKey implements Comparable<Object> {
 		return false;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String toString() {
 		StringBuilder b = new StringBuilder(256);

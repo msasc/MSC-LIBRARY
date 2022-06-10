@@ -37,7 +37,6 @@ public class Where extends Filter {
 
 	/**
 	 * Add an entire WHERE clause.
-	 * @param logOp The logical operator to chain the first segment.
 	 * @param where The WHERE clause to add.
 	 */
 	public void where(Where where) { filter(where); }
@@ -51,7 +50,8 @@ public class Where extends Filter {
 	/**
 	 * Set the where condition to match the primary key of the table.
 	 * @param table The table.
-	 * @param pk    The primary key values.
+	 * @param order The order.
+	 * @param key   The order key.
 	 */
 	public void where(Table table, Order order, OrderKey key) {
 		if (order == null) {
